@@ -1,0 +1,1 @@
+v phpmyadmin tabulka 'pinkJumper_scores'

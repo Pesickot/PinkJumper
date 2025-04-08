@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pink Astronaut - Pygame Aplikace</title>
+  <link rel="stylesheet" href="styly.css">
+</head>
+<body>
+
+  <header class="main-header">
+    <div class="container">
+      <div class="logo">
+        <i class="ri-gamepad-line"></i>
+        <h1>Pink Astronaut</h1>
+      </div>
+      
+      <div class="auth-buttons">
+        <a href="#auth" class="btn btn-ghost">Přihlášení</a>
+        <a href="#auth" class="btn btn-accent">Registrace</a>
+      </div>
+      
+      <button class="mobile-menu-btn">
+        <i class="ri-menu-line"></i>
+      </button>
+    </div>
+
+  </header>
+
+  <main>
+    <section id="home" class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h2>Pink Astronaut: Pygame Platformer</h2>
+            <p>Nová platforming hra s růžovým astronautem, vytvořené s Pygame. Skákejte do nekonečna, vyhýbejte se nepřátelům a hlavně nepadat!</p>
+            <div class="hero-buttons">
+              <a href="https://github.com/username/jumper" target="_blank" class="btn btn-white">
+                <i class="ri-github-fill"></i> Zobrazit na GitHubu
+              </a>
+              <a href="#auth" class="btn btn-outline">
+                Registrujte se nebo se přihlaš pro sledování skóre
+              </a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img src="screenshot.png" alt="Jumper Game Screenshot">
+          </div>
+        </div>
+      </div>
+    </section>
+
+  
+    <section id="auth" class="auth-section">
+      <div style="margin-top: 30px;">
+        <h2>Registrace</h2>
+        <form action="/cgi-bin/register.py" method="post">
+            <label for="reg-username">Uživatelské jméno:</label><br>
+            <input type="text" id="reg-username" name="username" required><br>
+            <label for="reg-password">Heslo:</label><br>
+            <input type="password" id="reg-password" name="password" required><br><br>
+            <input type="submit" value="Registrovat">
+        </form>
+    
+        <hr>
+    
+        <h2>Přihlášení</h2>
+        <form action="/cgi-bin/login.py" method="post">
+            <label for="login-username">Uživatelské jméno:</label><br>
+            <input type="text" id="login-username" name="username" required><br>
+            <label for="login-password">Heslo:</label><br>
+            <input type="password" id="login-password" name="password" required><br><br>
+            <input type="submit" value="Přihlásit se">
+        </form>
+      </div>
+    </section>
+
+  <script>
+
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.addEventListener('click', function() {
+
+        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        
+        this.classList.add('active');
+        
+        const tabId = this.getAttribute('data-tab') + '-tab';
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    
+    menuBtn.addEventListener('click', function() {
+      mobileMenu.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
