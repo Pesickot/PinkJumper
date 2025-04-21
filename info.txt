@@ -1,1 +1,145 @@
 v phpmyadmin tabulka 'pinkJumper_scores'
+
+v jumper.py predelej pinkJumper_scores
+
+Materiály
+
+#pro jumper - skore na cas
+
+import time
+
+#vložit mezi score a fadecounter
+time_played = 0
+start_time = time.time()
+
+
+#Přidat pro besttime.txt hned pod score.txt
+if os.path.exists('best_time.txt'):
+    with open('best_time.txt', 'r') as file:
+        best_time = float(file.read())
+else:
+    best_time = 0
+
+#format pro cas, vlozit pod draw_text a nad draw_panel
+def format_time(seconds):
+    minutes = int(seconds // 60)
+    seconds = int(seconds % 60)
+    return f"{minutes:02d}:{seconds:02d}"
+
+
+run = True
+while run:
+
+
+        if scroll > 0:
+            score += scroll
+
+	#yipiiiee
+        if time_played > best_time:
+            pass
+	
+	#vymazat drawtetx high score
+        platform_group.draw(screen)
+        enemy_group.draw(screen)
+        jumpy.draw()
+
+        draw_panel()
+
+      	#uprava score na time
+        else:
+            draw_text('GAME OVER!', font_big, WHITE, 130, 200)
+            draw_text('TIME: ' + format_time(time_played), font_big, WHITE, 130, 250)
+            draw_text('PRESS SPACE TO PLAY AGAIN', font_big, WHITE, 40, 300)
+            
+            if time_played > best_time:
+                best_time = time_played
+                with open('best_time.txt', 'w') as file:
+                    file.write(str(best_time))
+                
+                mydb = mysql.connector.connect(
+                    host="dbs.spskladno.cz",
+                    user="student15",
+                    password="spsnet",
+                    database="vyuka15"
+                )
+
+                mycursor = mydb.cursor()
+
+                username = "player"
+                sql = "INSERT INTO pinkJumper_scores (username, score) VALUES (%s, %s)"
+                val = (username, int(time_played))
+
+                mycursor.execute(sql, val)
+                mydb.commit()
+
+                print(f"Time {format_time(time_played)} was successfully saved to database.")
+
+                mycursor.close()
+                mydb.close()
+
+           
+                #Do key vlozit mezi score a scroll
+                start_time = time.time()
+                time_played = 0
+               
+
+		#pridat if event time
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+
+            if time_played > best_time:
+                best_time = time_played
+                with open('best_time.txt', 'w') as file:
+                    file.write(str(best_time))
+
+            if score > high_score:
+                high_score = score
+                with open('score.txt', 'w') as file:
+                    file.write(str(high_score))
+            run = False
+
+
+    pygame.display.update()
+
+
+
+pygame.quit()
+
+
+#webovka - section
+
+ <section id="code" class="code-section">
+      <div class="container">
+        <h2 class="glow">Implementace kódu</h2>
+        
+        <div class="code-snippet">
+          <div class="snippet-header">
+            <h3>Hlavní herní smyčka</h3>
+            <div class="language-badge">Python</div>
+          </div>
+          
+          <div class="code-block">
+<pre><code class="language-python">Text 
+Text
+</code></pre>
+          </div>
+          
+          <p class="snippet-description">TEXT</p>
+        </div>
+        
+        <div class="code-snippet">
+          <div class="snippet-header">
+            <h3>Fyzika hráče</h3>
+            <div class="language-badge">Python</div>
+          </div>
+          
+          <div class="code-block">
+<pre><code class="language-python">TEXT
+
+</code></pre>
+          </div>
+          
+          <p class="snippet-description">TETXT</p>
+        </div>
+      </div>
+    </section>
